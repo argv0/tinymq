@@ -1,0 +1,17 @@
+tinymq:  a minimalist message queueing server
+Copyright (c) 2009 Andy Gross <andy@andygross.org>
+Licensed under the Apache License, Version 2 (see LICENSE)
+---
+
+NB:  this was a project for me to scratch my c++ itch and isn't intented
+     for any sort of production use. 
+
+tinymq is a message queueing server designed for simplicity and (eventually) 
+reliability and performance.
+
+notable features:
+  - persistent mmap()-based backing store for message durability
+  - no complex message format - messages are simple binary blobs
+  - simple api : put(message), get(), and ack(message_id)
+  - each tinymq instance manages only one queue
+
