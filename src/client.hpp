@@ -37,22 +37,10 @@ public:
     typedef boost::shared_ptr<client> shared_ptr;
     typedef boost::weak_ptr<client> weak_ptr;
 public:
-    typedef std::pair<std::time_t, message_shared_ptr> message_receipt;
-    typedef std::map<message_id, message_receipt> receipt_map;
-private:
-    receipt_map outstanding_;
-    message_queue *queue_;
-public:
-    client(message_queue *mq);
-    virtual ~client();
-    message_queue *queue();
-    std::size_t qsize() const;
-    receipt_map& outstanding();
+    client() {}
     message_shared_ptr dequeue_message();
-    message_id enqueue_message(unsigned char *data, std::size_t len);
+    void enqueue_message(unsigned char *data, std::size_t len);
     void wait();
-    bool ack_message(message_id id);
-    virtual void notify();
 };
 
 

@@ -32,7 +32,6 @@
 #include <boost/noncopyable.hpp>
 #include <boost/shared_ptr.hpp>
 #include "connection.hpp"
-#include "message_queue.hpp"
 
 namespace tinymq {
 
@@ -42,13 +41,11 @@ public:
       const std::string& doc_root);
   void run();
   void stop();
-  message_queue& queue()  { return message_queue_; }
 private:
   void handle_accept(const boost::system::error_code& e);
   boost::asio::io_service io_service_;
   boost::asio::ip::tcp::acceptor acceptor_;
   connection_ptr new_connection_;
-  message_queue message_queue_;
 };
 
 } // namespace tinymq

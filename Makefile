@@ -1,32 +1,20 @@
 CPP_SRCS += \
 src/client.cpp \
 src/connection.cpp \
-src/message.cpp \
-src/message_queue.cpp \
 src/server.cpp \
-src/tcp_client.cpp \
-src/tinymq.cpp \
-src/durable_store.cpp
+src/tinymq.cpp 
 
 OBJS += \
 src/client.o \
 src/connection.o \
-src/message.o \
-src/message_queue.o \
 src/server.o \
-src/tcp_client.o \
-src/tinymq.o \
-src/durable_store.o
+src/tinymq.o 
 
 CPP_DEPS += \
 src/client.d \
 src/connection.d \
-src/message.d \
-src/message_queue.d \
 src/server.d \
-src/tcp_client.d \
-src/tinymq.d \
-src/durable_store.d
+src/tinymq.d 
 
 BOOST_PREFIX=/opt/local
 

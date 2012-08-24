@@ -27,18 +27,18 @@
 #include <string>
 #include <boost/program_options.hpp>
 #include "server.hpp"
-#include <boost/logging/format/named_write.hpp>
-#include <boost/logging/format_all.hpp>
-#include <boost/logging/format/formatter/tags.hpp>
-#include "tinymq_log.hpp"
+//#include <boost/logging/format/named_write.hpp>
+//#include <boost/logging/format_all.hpp>
+//#include <boost/logging/format/formatter/tags.hpp>
+//#include "tinymq_log.hpp"
 
 namespace po = boost::program_options;
-using namespace boost::logging;
+//using namespace boost::logging;
 
-BOOST_DEFINE_LOG_FILTER(g_l_filter, finder::filter ) 
-BOOST_DEFINE_LOG(g_l, finder::logger) 
+//BOOST_DEFINE_LOG_FILTER(g_l_filter, finder::filter ) 
+//BOOST_DEFINE_LOG(g_l, finder::logger) 
 
-
+/*
 void init_logs() {
     g_l()->writer().add_formatter( formatter::tag::file_line(), "[ %] " );
     g_l()->writer().add_formatter( formatter::idx(), "[%] " );
@@ -47,9 +47,10 @@ void init_logs() {
     g_l()->writer().add_destination( destination::cout() );
     g_l()->turn_cache_off();
 }
+*/
 
 int main(int argc, char* argv[]) {
-    init_logs();
+    //    init_logs();
     std::string ip;
     std::string port;
     std::string datadir;
@@ -78,7 +79,7 @@ int main(int argc, char* argv[]) {
         return 1;
     }
     try {
-        LAPP_ << "starting tinymq.server (" << ip << ":" << port << ":" << datadir << ")";
+        //        LAPP_ << "starting tinymq.server (" << ip << ":" << port << ":" << datadir << ")";
         tinymq::server s(ip, port, datadir);
         s.run();
         s.stop();

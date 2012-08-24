@@ -27,16 +27,14 @@
 #include <boost/bind.hpp>
 #include <boost/shared_ptr.hpp>
 #include "server.hpp"
-#include "tinymq_log.hpp"
 
 namespace tinymq {
 
 server::server(const std::string& address, const std::string& port,
         const std::string& doc_root) :
     acceptor_(io_service_),
-    new_connection_(new connection(io_service_, this)),
-    message_queue_("tinymq.data", 52428800L) {
-    LAPP_ << "queue initialized, now accepting connections on port " << port;
+    new_connection_(new connection(io_service_, this))
+{
     boost::asio::ip::tcp::resolver resolver(io_service_);
     boost::asio::ip::tcp::resolver::query query(address, port);
     boost::asio::ip::tcp::endpoint endpoint = *resolver.resolve(query);

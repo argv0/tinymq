@@ -34,9 +34,7 @@
 #include <boost/enable_shared_from_this.hpp>
 #include <boost/asio/local/stream_protocol.hpp>
 #include <boost/asio/local/connect_pair.hpp>
-
-#include "message_queue.hpp"
-#include "tcp_client.hpp"
+#include "client.hpp"
 
 namespace tinymq {
 
@@ -49,12 +47,11 @@ class connection : public boost::enable_shared_from_this<connection>,
     boost::array<char, 8192> buffer_;
     std::vector<char> incoming_;
     server *server_;
-    tcp_client_ptr client_;
+    client::shared_ptr client_;
     message_shared_ptr curmsg_;
 public:
     enum command { // command ids
         get_msg = 0,
-        ack_msg = 1,
         put_msg = 2
     };
     enum { command_length = 8 };
@@ -65,22 +62,12 @@ public: // api
     boost::asio::ip::tcp::socket& socket();
     void start();
 private:
-    void handle_resume(const boost::system::error_code& e,
+     void handle_read_length(const boost::system::error_code& e,
         std::size_t bytes_transferred);
-    void handle_read_command(const boost::system::error_code& e,
-        std::size_t bytes_transferred);
-    void handle_read_length(const boost::system::error_code& e,
-        std::size_t bytes_transferred);
-    void handle_read_message_id(const boost::system::error_code& e,
-        std::size_t bytes_transferred);
-    void handle_read_message(const boost::system::error_code& e,
+     void handle_read_message(const boost::system::error_code& e,
         std::size_t bytes_transferred);
     void handle_write(const boost::system::error_code& e,
         std::size_t bytes_transferred);
-    void read_next_command();
-    void wait();
-    void cmd_get();
-    void cmd_ack(message_id id);
 };
 
 typedef boost::shared_ptr<connection> connection_ptr;
